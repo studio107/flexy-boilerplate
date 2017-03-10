@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react"
+  ],
+  "rules": {
+    // enable tslint-react rules here
+    "jsx-no-lambda": true
+  }
+}

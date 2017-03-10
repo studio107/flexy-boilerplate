@@ -1,0 +1,46 @@
+{
+  "name": "flexy-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch:web": "gulp watch",
+    "watch:webpack": "webpack --progress --colors --watch --config=./webpack.config.js",
+    "lint:ts": "tslint -c ./tslint.json './src/**/*.tsx'",
+    "lint:scss": "sass-lint -c ./scss-lint.yml './scss/**/*.scss' -v -q",
+    "build:dev": "gulp && webpack",
+    "build:prod": "NODE_ENV=production gulp && webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flexy-framework/boilerplate.git"
+  },
+  "author": "Falaleev Maxim <max@studio107.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flexy-framework/boilerplate/issues"
+  },
+  "homepage": "https://github.com/flexy-framework/boilerplate#readme",
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.1.2",
+    "bluebird": "^3.5.0",
+    "browser-sync": "^2.18.8",
+    "flexy-framework": "^3.1.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^2.0.0",
+    "gulp-flatten": "^0.3.1",
+    "gulp-sass": "^3.1.0",
+    "preact": "^7.2.0",
+    "preact-compat": "^3.14.0",
+    "sass-lint": "^1.10.2",
+    "source-map-loader": "^0.2.0",
+    "ts-loader": "^2.0.1",
+    "tslint": "^4.5.1",
+    "tslint-react": "^2.4.0",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1"
+  }
+}
