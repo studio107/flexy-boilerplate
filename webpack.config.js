@@ -7,7 +7,7 @@ module.exports = {
         app: './src/index.js'
     },
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, './dist/js'),
         filename: '[name].bundle.js'
     },
     target: "web",
@@ -19,14 +19,13 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json']
     },
     module: {
-        preLoaders: [
+        loaders: [
             {
                 test: /\.jsx$|\.js$/,
                 loader: 'eslint-loader',
-                include: __dirname + '/src'
-            }
-        ],
-        loaders: [
+                include: __dirname + '/src',
+                enforce: 'pre'
+            },
             {
                 test: /\.jsx$|\.js$/,
                 exclude: /node_modules/,
