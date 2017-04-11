@@ -1,21 +1,31 @@
-var path = require('path'),
-    gulp = require('gulp'),
+var gulp = require('gulp'),
     concat = require('gulp-concat'),
     autoprefixer = require('gulp-autoprefixer'),
     flatten = require('gulp-flatten'),
     csso = require('gulp-csso'),
     sass = require('gulp-sass'),
-    config = require('./flexyconfig.json'),
+    plumber = require('gulp-plumber'),
+    watch = require('gulp-watch'),
+    imagemin = require('gulp-imagemin'),
+    gulpif = require('gulp-if'),
     browserSync = require('browser-sync').create();
 
 var settings = {
+    imagemin: {
+        interlaced: true,
+        progressive: true,
+        optimizationLevel: 5,
+        svgoPlugins: [
+            { removeViewBox: true }
+        ]
+    },
     scsso: {
         comments: false,
         restructure: false
     },
     sass: {
         includePaths: [
-            'flexy-framework'
+            'node_modules/flexy-framework'
         ]
     },
     paths: {
@@ -27,26 +37,28 @@ var settings = {
         ]
     },
     dst: {
-        css: path.join(config.dst, 'css'),
-        images: path.join(config.dst, 'images'),
-        fonts: path.join(config.dst, 'fonts')
+        css: './dist/css',
+        images: './dist/images',
+        fonts: './dist/fonts'
     }
 };
 
 gulp.task('fonts', function () {
-    gulp.src(settings.paths.fonts)
+    return gulp.src(settings.paths.fonts)
         .pipe(flatten())
         .pipe(gulp.dest(settings.dst.fonts));
 });
 
 gulp.task('images', function () {
-    gulp.src(settings.paths.images)
+    return gulp.src(settings.paths.images)
+        .pipe(gulpif(process.env.NODE_ENV == 'production', imagemin(settings.imagemin)))
         .pipe(gulp.dest(settings.dst.images))
         .pipe(browserSync.stream());
 });
 
 gulp.task('css', function () {
     return gulp.src(settings.paths.css)
+        .pipe(plumber())
         .pipe(sass(settings.sass).on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
@@ -64,12 +76,15 @@ gulp.task('watch', function () {
         proxy: "localhost:8000"
     });
 
-    gulp.watch('../public/js/**/*.js').on('change', browserSync.reload);
-    gulp.watch([
-        'scss/**/*.scss',
-        'flexy-framework/flexy/**/*.scss'
-    ], ['css']);
-    gulp.watch(settings.paths.fonts, ['fonts']);
+    watch('./dist/js/**/*.js', function () {
+        browserSync.reload();
+    });
+    watch('scss/**/*.scss', function () {
+        gulp.start(['css']);
+    });
+    watch(settings.paths.fonts, function () {
+        gulp.start(['fonts']);
+    });
 });
 
 gulp.task('default', function () {

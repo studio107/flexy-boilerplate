@@ -3,10 +3,8 @@ var webpack = require('webpack'),
 
 module.exports = {
     devtool: 'source-map',
-    // context: path.resolve(__dirname, './src'),
     entry: {
-        // app: path.resolve(__dirname, './src/app.tsx')
-        app: './src/app.tsx'
+        app: './src/index.js'
     },
     output: {
         path: path.resolve(__dirname, './dist'),
@@ -14,19 +12,15 @@ module.exports = {
     },
     target: "web",
     resolve: {
-        alias: {
-            "react": "preact-compat",
-            "react-dom": "preact-compat"
-        },
         modules: [
             path.resolve(__dirname, './src'),
             'node_modules'
         ],
-        extensions: ['.ts', '.tsx', '.json']
+        extensions: ['.js', '.jsx', '.json']
     },
     module: {
         loaders: [
-            { test: /\.tsx?$/, exclude: /node_modules/, loaders: ['ts-loader'] }
+            { test: /\.(js|jsx)?$/, exclude: /node_modules/, loaders: ['babel-loader'] }
         ]
     },
     plugins: [
