@@ -19,8 +19,19 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json']
     },
     module: {
+        preLoaders: [
+            {
+                test: /\.jsx$|\.js$/,
+                loader: 'eslint-loader',
+                include: __dirname + '/src'
+            }
+        ],
         loaders: [
-            { test: /\.(js|jsx)?$/, exclude: /node_modules/, loaders: ['babel-loader'] }
+            {
+                test: /\.jsx$|\.js$/,
+                exclude: /node_modules/,
+                loaders: 'babel-loader'
+            }
         ]
     },
     plugins: [

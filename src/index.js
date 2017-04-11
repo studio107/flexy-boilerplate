@@ -1,5 +1,17 @@
 import $ from 'jquery';
+import App from './app';
+
+class Base {
+
+}
+
+class HelloWorld extends Base {
+    hello() {
+        console.log('Hello flexy!');
+        return this;
+    }
+}
 
 $(() => {
-   console.log('Hello flexy!');
+    (new HelloWorld()).hello();
 });

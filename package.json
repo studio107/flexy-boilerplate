@@ -6,7 +6,7 @@
   "scripts": {
     "watch:web": "gulp watch",
     "watch:webpack": "webpack --progress --colors --watch --config=./webpack.config.js",
-    "lint:js": "echo \"Error: TODO\" && exit 1",
+    "lint:js": "eslint --ext .js,.jsx src/**",
     "lint:scss": "sass-lint -c ./scss-lint.yml './scss/**/*.scss' -v -q",
     "build:dev": "gulp && webpack",
     "build:prod": "NODE_ENV=production gulp && NODE_ENV=production webpack",
@@ -23,8 +23,15 @@
   },
   "homepage": "https://github.com/flexy-framework/boilerplate#readme",
   "devDependencies": {
+    "babel-eslint": "^7.2.1",
     "bluebird": "^3.5.0",
     "browser-sync": "^2.18.8",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
     "flexy-framework": "^4.0.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
@@ -36,8 +43,14 @@
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^3.1.0",
     "gulp-watch": "^4.3.11",
+    "prop-types": "^15.5.6",
+    "react": "^15.5.3",
+    "react-dom": "^15.5.3",
     "sass-lint": "^1.10.2",
     "source-map-loader": "^0.2.0",
     "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
   }
 }
