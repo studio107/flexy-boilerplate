@@ -1,4 +1,4 @@
-var webpack = require('webpack'),
+let webpack = require('webpack'),
     path = require('path');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
         app: './src/index.js'
     },
     output: {
-        path: path.resolve(__dirname, './dist/js'),
+        path: path.resolve(__dirname, './build/js'),
         filename: '[name].bundle.js'
     },
     target: "web",
